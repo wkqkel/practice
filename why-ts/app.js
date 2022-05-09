@@ -8,8 +8,10 @@ var address = document.querySelector("#address");
 
 // user data
 var user = {};
+// 아래는 jsDoc을 이용한 js에서 타입정의방법
 // 이 아래에서 사용할 타입에 대한 정의
 //어드레스 객체에대한정의
+
 //어드레스에 타입객체에 대한 정의를 어드레스 속성이함
 /**
  * @typedef {object} Address
@@ -21,9 +23,9 @@ var user = {};
  * @typedef {object} User
  * @property {string} name
  * @property {string} email
- * @property {Address} address
+ * @property {Address} address // 위에 Address에 대한 정의를 해줌 object와 내부
  */
-// 제너릭이라고 하는 부분인데 axios의 프로미스값을 프로미스에 유저라는 타입이 담겨있을거다
+// 아래는 제너릭이라고 하는 부분인데 axios의 프로미스값을 프로미스에 유저라는 타입이 담겨있고 볼 수 있음
 /**
  * @returns {Promise<User>}
  */
