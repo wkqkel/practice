@@ -19,3 +19,12 @@ class Person {
     this.age = age;
   }
 }
+
+// 리액트 예전 문법 - 클래스 기반코드
+class App extends React.Component {}
+// 리액트 최신 문법 - 훅기반의 함수형 코드
+function App() {
+  return <div>Hello World</div>;
+}
+
+// 따라서 클래스를 그렇게 많이 볼일은 없으니 기본적인 문법정도만 알고 나중에 실습해보며 이걸 이렇게 쓸수 있겠구나 하면됨
