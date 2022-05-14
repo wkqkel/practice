@@ -5,31 +5,32 @@
 // .eslintc.js가서 또 typescript off돼있는걸 주석처리하면 api쪽 펑션보면 에러 남.
 
 // phones안의 phone은 그냥 변수로 아래보면 키값인 phone은 home이될수도 office가 될수도 있음
-interface PhoneNumberDictionary {
-  [phone: string]: {
-    num: number;
-  };
-}
+// interface PhoneNumberDictionary {
+//   [phone: string]: {
+//     num: number;
+//   };
+// }
 
-// 전화번호부라는 객체의 규격을 정의
-interface Contact {
-  name: string;
-  address: string;
-  phones: PhoneNumberDictionary;
-}
+// // 전화번호부라는 객체의 규격을 정의
+// interface Contact {
+//   name: string;
+//   address: string;
+//   phones: PhoneNumberDictionary;
+// }
 
-// 왼쪽에 이넘의 속성을 정의하고, 오른쪽에 할당될 문자의 값을 정의
-enum PhoneType {
-  Home = "home",
-  Office = "office",
-  Studio = "studio",
-}
+// // 왼쪽에 이넘의 속성을 정의하고, 오른쪽에 할당될 문자의 값을 정의
+// enum PhoneType {
+//   Home = "home",
+//   Office = "office",
+//   Studio = "studio",
+// }
 
 // api
 // TODO: 아래 함수의 반환 타입을 지정해보세요.
 // fetchContacts는 api묘사함수로 리턴값이 프로미스
 // api호출해와서 응답의 규격을 정의할 때 제네릭을 가장 많이 사용
 
+import { Contact, PhoneType } from "./types";
 // Contact라는 인터페이스의 배열을 Promise의 반환값으로 받겠다
 function fetchContacts(): Promise<Contact[]> {
   // TODO: 아래 변수의 타입을 지정해보세요.
