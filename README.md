@@ -56,16 +56,10 @@
 ```js
 <li class="menu-list-item d-flex items-center py-2">
   <span class="w-100 pl-2 menu-name">${name}</span>
-  <button
-    type="button"
-    class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button"
-  >
+  <button type="button" class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button">
     수정
   </button>
-  <button
-    type="button"
-    class="bg-gray-50 text-gray-500 text-sm menu-remove-button"
-  >
+  <button type="button" class="bg-gray-50 text-gray-500 text-sm menu-remove-button">
     삭제
   </button>
 </li>
@@ -79,25 +73,37 @@
 - [ ] 품절 상태인 경우를 보여줄 수 있게, 품절 버튼을 추가하고 `sold-out` class를 추가하여 상태를 변경한다.
 - 품절 상태 메뉴의 마크업
 
+// TODO localStorage Read & Write
+// - [] localStorage 데이터를 저장한다
+// - [] 메뉴 추가
+// - [] 메뉴 수정
+// - [] 메뉴 삭제
+// - [] localStorage에 있는 데이터를 읽어온다.
+// TODO 카테고리별 메뉴판관리
+// - [] 에스프레소 메뉴판 관리
+// - [] 프라푸치노 메뉴판 관리
+// - [] 블렌디드 메뉴판 관리
+// - [] 티바나 메뉴판 관리
+// - [] 디저트 메뉴판 관리
+// TODO 페이지 접근시 최초 데이터 Read & Rendering
+// - [] 페이지에 최초로 접근할 때 로컬스토리지에서 에스프레소 메뉴를 읽어온다.
+// - [] 에스프레소 메뉴를 페이지에 그려준다.
+// TODO 품절 상태 관리
+// - [] 품절버튼을 추가한다.
+// - [] 품절버튼을 클릭하면 localStorage에 상태값이 저장된다.
+// - [] 품절 해당메뉴의 상태값이 페이지에 그려진다.
+// - [] 클릭이벤트에서 가장 가까운 li태그의 클래스에 sold-out을 추가한다.
+
 ```js
 <li class="menu-list-item d-flex items-center py-2">
   <span class="w-100 pl-2 menu-name sold-out">${name}</span>
-  <button
-    type="button"
-    class="bg-gray-50 text-gray-500 text-sm mr-1 menu-sold-out-button"
-  >
+  <button type="button" class="bg-gray-50 text-gray-500 text-sm mr-1 menu-sold-out-button">
     품절
   </button>
-  <button
-    type="button"
-    class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button"
-  >
+  <button type="button" class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button">
     수정
   </button>
-  <button
-    type="button"
-    class="bg-gray-50 text-gray-500 text-sm menu-remove-button"
-  >
+  <button type="button" class="bg-gray-50 text-gray-500 text-sm menu-remove-button">
     삭제
   </button>
 </li>
@@ -111,6 +117,22 @@
   - [ ] fetch 비동기 api를 사용하는 부분을 async await을 사용하여 구현한다.
   - [ ] API 통신이 실패하는 경우에 대해 사용자가 알 수 있게 [alert](https://developer.mozilla.org/ko/docs/Web/API/Window/alert)으로 예외처리를 진행한다.
 - [ ] 중복되는 메뉴는 추가할 수 없다.
+
+// 단위쪼개기
+
+// - [] 웹서버를 띄운다.
+// - [] 서버에 새로운 메뉴가 추가될 수 있도록 요청한다.
+// - [] 서버에 카테고리별 메뉴리스트를 불러온다.
+// - [] 서버에 메뉴가 수정될 수 있도록 요청한다.
+// - [] 서버에 메뉴의 품절상태를 토글될 수 있도록 요청한다.
+// - [] 서버에 메뉴가 삭제될 수 있도록 요청한다.
+
+// 리팩터링
+// -[] localStorage에 저장하는 로직은 지운다.
+// -[] fetch 비동기 api를 사용하는 부분을 async await를 사용해 구현한다.
+// 사용자경험
+// -[] api 통신이 실패하는 경우에 대해 사용자가 알 수 있게 alert로 예외처리를 진행한다.
+// -[] 중복되는 메뉴는 추가할 수 없다.
 
 ## 📝 API
 
