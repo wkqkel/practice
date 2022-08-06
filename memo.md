@@ -10,7 +10,7 @@ We need to impose restrictions on API as well as on the site
 - 1. get access/ permission
 - 2. Send request to protected resource
 
-인증방식은 크게 서버사이드세션 또는 인증토큰을 이용(JWT인듯)
+인증방식은 크게 서버사이드세션 또는 인증토큰을 이용(JWT)
 서버사이드 세션은 서버가 특정 클라이언트의 고유 id를 생성하고 저장하고, 클라이언트에 전송.
 단점: 서버와 클라이언트가 분리돼있을 경우,
 
@@ -30,3 +30,7 @@ project생성 후 authentication탭
 
 비밀번호 변경 시 이메일이 아닌 id 토큰을 보내는 이유
 이메일만 아는 사람이 비밀번호 변경 api를 요청할 수 있기때문에 로그인한 유저에게만 발급되는 id토큰을 보내게 함.
+
+#### logout
+
+jwt방식은 서버에 내가 로그인했는지 한 상태인지 저장하지도 않고 관심도 없기때문에, 로그아웃시 따로 요청을 보내지 않아도 됨
