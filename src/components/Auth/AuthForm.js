@@ -58,7 +58,10 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
+        // 현재시간(밀리초) + 데이터로 오는 만료시간(문자열로된 초: 1시간이 디폴트)밀리초
+
+        const expirationTime = new Date(new Date().getTime() + +data.expiresIn * 1000);
+        authCtx.login(data.idToken, expirationTime.toISOString());
         history.replace("/");
       })
       .catch((err) => {
