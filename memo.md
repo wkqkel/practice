@@ -25,3 +25,8 @@ We need to impose restrictions on API as well as on the site
 #### firebase auth rest api이용
 
 project생성 후 authentication탭
+
+#### profile form
+
+비밀번호 변경 시 이메일이 아닌 id 토큰을 보내는 이유
+이메일만 아는 사람이 비밀번호 변경 api를 요청할 수 있기때문에 로그인한 유저에게만 발급되는 id토큰을 보내게 함.
