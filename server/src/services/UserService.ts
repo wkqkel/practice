@@ -1,5 +1,6 @@
 import db from '../lib/db.js'
 import bcyrpt from 'bcrypt'
+import AppError from '../lib/AppError.js'
 
 const SALT_ROUNDS = 10
 
@@ -22,7 +23,7 @@ class UserService {
   async register({ username, password }: AuthParams) {
     const exists = await db.user.findUnique({ where: { username } })
     if (exists) {
-      throw new Error(`User ${username} already registered`)
+      throw new AppError('UserExistsError')
     }
     const hash = await bcyrpt.hash(password, SALT_ROUNDS)
     const user = await db.user.create({
