@@ -15,8 +15,11 @@
   "dependencies": {
     "@fastify/swagger": "^7.6.1",
     "@prisma/client": "^4.4.0",
+    "@types/jsonwebtoken": "^8.5.9",
     "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
     "fastify": "^4.7.0",
+    "jsonwebtoken": "^8.5.1",
     "prisma": "^4.4.0"
   },
   "scripts": {
