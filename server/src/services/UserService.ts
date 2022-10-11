@@ -66,7 +66,6 @@ class UserService {
     }
 
     try {
-      // 프로미스이므로 try catch
       const result = await bcyrpt.compare(password, user.passwordHash)
       if (!result) {
         throw new AppError('AuthenticationError')
