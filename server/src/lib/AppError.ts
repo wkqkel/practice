@@ -45,7 +45,7 @@ const statusCodeMap: Record<ErrorName, ErrorInfo> = {
   },
   RefreshTokenError: {
     message: 'Refresh Token Error',
-    statusCode: 400,
+    statusCode: 401,
   },
 }
 
