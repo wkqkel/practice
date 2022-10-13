@@ -3,6 +3,8 @@ type ErrorName =
   | 'AuthenticationError'
   | 'UnknownError'
   | 'UnauthorizedError'
+  | 'BadRequestError'
+  | 'RefreshTokenError'
 
 type ErrorInfo = {
   statusCode: number
@@ -16,6 +18,8 @@ interface ErrorPayloads {
   UnauthorizedError: {
     isExpiredToken: boolean
   }
+  BadRequestError: undefined
+  RefreshTokenError: undefined
 }
 
 const statusCodeMap: Record<ErrorName, ErrorInfo> = {
@@ -34,6 +38,14 @@ const statusCodeMap: Record<ErrorName, ErrorInfo> = {
   UnauthorizedError: {
     message: 'Unauthorized',
     statusCode: 401,
+  },
+  BadRequestError: {
+    message: 'Bad request',
+    statusCode: 400,
+  },
+  RefreshTokenError: {
+    message: 'Refresh Token Error',
+    statusCode: 400,
   },
 }
 

@@ -1,7 +1,8 @@
+import { RefreshTokenPayload } from './../lib/tokens'
 import db from '../lib/db.js'
 import bcyrpt from 'bcrypt'
 import AppError, { isAppError } from '../lib/AppError.js'
-import { generateToken } from '../lib/tokens.js'
+import { generateToken, validateToken } from '../lib/tokens.js'
 import { User } from '@prisma/client'
 
 const SALT_ROUNDS = 10
@@ -22,19 +23,27 @@ class UserService {
     return UserService.instance
   }
 
-  async generateTokens(user: User) {
+  async createTokenId(userId: number) {
+    const token = await db.token.create({
+      data: { userId },
+    })
+    return token.id
+  }
+
+  async generateTokens(user: User, existingTokenId?: number) {
     const { id: userId, username } = user
+    const tokenId = existingTokenId ?? (await this.createTokenId(user.id))
 
     const [accessToken, refreshToken] = await Promise.all([
       generateToken({
         type: 'access_token',
         userId,
-        tokenId: 1,
+        tokenId,
         username,
       }),
       generateToken({
         type: 'refresh_token',
-        tokenId: 1,
+        tokenId,
         rotationCounter: 1,
       }),
     ])
@@ -79,6 +88,26 @@ class UserService {
     const tokens = await this.generateTokens(user)
 
     return { tokens, user }
+  }
+
+  async refreshToken(token: string) {
+    try {
+      const decoded = await validateToken<RefreshTokenPayload>(token)
+      const tokenItem = await db.token.findUnique({
+        where: {
+          id: decoded.tokenId,
+        },
+        include: {
+          user: true,
+        },
+      })
+      if (!tokenItem) {
+        throw new Error('Token not found')
+      }
+      return this.generateTokens(tokenItem.user, decoded.tokenId)
+    } catch (e) {
+      throw new AppError('RefreshTokenError')
+    }
   }
 }
 
