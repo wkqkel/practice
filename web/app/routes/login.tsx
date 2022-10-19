@@ -1,23 +1,15 @@
-import { useNavigate } from '@remix-run/react'
-import styled from 'styled-components'
+import FullHeightPage from '~/Components/FullHeightPage'
 import Header from '~/Components/Header'
 import HeaderBackButton from '~/Components/HeaderBackButton'
+import { useGoBack } from '~/hooks/useGoBack'
 
 const Login = () => {
-  const navigate = useNavigate()
-
-  const goBack = () => {
-    navigate(-1)
-  }
+  const goBack = useGoBack()
   return (
-    <Page>
+    <FullHeightPage>
       <Header title="로그인" headerLeft={<HeaderBackButton onClick={goBack} />} />
-    </Page>
+    </FullHeightPage>
   )
 }
-
-const Page = styled.div`
-  height: 100%;
-`
 
 export default Login
