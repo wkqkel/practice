@@ -1,3 +1,4 @@
+import AuthForm from '~/Components/AuthForm'
 import FullHeightPage from '~/Components/FullHeightPage'
 import Header from '~/Components/Header'
 import HeaderBackButton from '~/Components/HeaderBackButton'
@@ -8,6 +9,7 @@ const Login = () => {
   return (
     <FullHeightPage>
       <Header title="로그인" headerLeft={<HeaderBackButton onClick={goBack} />} />
+      <AuthForm mode="login" />
     </FullHeightPage>
   )
 }
