@@ -29,14 +29,6 @@ const LabelInput = ({ label, ...rest }: Props) => {
 const Block = styled.div`
   display: flex;
   flex-direction: column;
-
-  label {
-    font-size: 16px;
-    line-height: 1.5; // 피그마 150%
-    color: ${colors.gray4};
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
 `
 
 const Label = styled.label<{ focused?: boolean }>`
