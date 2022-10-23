@@ -1,45 +1,52 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
+  import AddTodo from "./lib/AddTodo.svelte";
+  import TodoItem from "./lib/TodoItem.svelte";
+
+  const INITIAL_TODO_LIST = [
+    { id: 0, title: "스벨트 공부", done: false },
+    { id: 1, title: "리액트 공부", done: false },
+    { id: 2, title: "자바스크립트 공부", done: false },
+  ];
+
+  let todos = [...INITIAL_TODO_LIST];
+
+  function handelAddTodo(e) {
+    const todoInputText = e.detail;
+    todos = [...todos, { id: todos.length, title: todoInputText, done: false }];
+  }
+  function handleEditTodo(e) {
+    const newTodo = e.detail;
+    todos = todos.map((todo) => (todo.id === newTodo.id ? newTodo : todo));
+  }
+  function handleDeleteTodo(e) {
+    const id = e.detail;
+    todos = todos.filter((todo) => todo.id !== id);
+  }
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank"> 
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
+  <div class="todo">
+    <h1>Todo-List</h1>
+    <AddTodo on:add={handelAddTodo} />
+    <ul>
+      {#each todos as todo (todo.id)}
+        <TodoItem {todo} on:delete={handleDeleteTodo} on:edit={handleEditTodo} />
+      {/each}
+    </ul>
   </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
 </main>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
+  main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+  .todo {
+    height: 100%;
+    width: 320px;
+    padding: 20px;
+    border: 1px solid black;
   }
 </style>
