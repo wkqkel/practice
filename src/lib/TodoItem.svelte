@@ -1,11 +1,12 @@
 <script>
+  import StyledButton from "../components/StyledButton.svelte";
   import { createEventDispatcher } from "svelte";
   export let todo;
 
   let inputValue = todo.title;
+  let isEditing = false;
 
   const dispatch = createEventDispatcher();
-  let isEditing = false;
 
   const toggleIsEditing = () => {
     isEditing = !isEditing;
@@ -22,10 +23,10 @@
 
   const onClickEditBtn = () => {
     toggleIsEditing();
-    inputValue = todo.title;
   };
 
   const onClickCancelBtn = () => {
+    inputValue = todo.title;
     toggleIsEditing();
   };
 </script>
@@ -48,6 +49,8 @@
     list-style-type: none;
   }
   .done span {
-    text-decoration: line-through red;
+    opacity: 0.4;
+    text-decoration: line-through black;
   }
+
 </style>

@@ -44,3 +44,54 @@ https://daveceddia.com/svelte-reactive-destructuring/
 ```
 
 근데 이렇게하니 done이 또안됨 title.done에 할당이 안돼고 done에 하기때문인듯
+
+왜 함수 props가 아니고, dispatch로 내려줄까 하니 dispatch시에는 위에서 export let 선언을 안해도됨.
+이벤트에 의해 발생하는 명시적 표현? 근데 이건 사실 함수이름에서 해주는게 맞음.
+
+읽어보기
+https://ui.toast.com/weekly-pick/ko_20191002
+
+### form으로 리팩토링
+
+기존코드
+onClickAddBtn라는 함수를 handleKeydown 여기서 사용하는게 별로였음. 버튼을 클릭하는것도 아닌데 네이밍 구림.
+
+<script>
+  const onClickAddBtn = () => {
+    if (!todoInputText.trim()) return focus();
+    dispatch("add", todoInputText);
+    todoInputText = "";
+  };
+
+  function handleKeydown(event) {
+    if (event.key === "Enter") {
+      onClickAddBtn();
+    }
+  }
+</script>
+
+  <input  on:keydown={handleKeydown}  bind:value={todoInputText} bind:this={input} placeholder="Add todo" />
+  <button on:click={onClickAddBtn}>Add</button>
+
+변경코드
+
+<script>
+function focus() {
+  input.focus();
+}
+
+const onSubmit = () => {
+  if (!todoInputText.trim()) return focus();
+  dispatch("add", todoInputText);
+  todoInputText = "";
+};
+</script>
+
+<form on:submit|preventDefault={onSubmit}>
+  <input bind:value={todoInputText} bind:this={input} placeholder="Add todo" />
+  <button>Add</button>
+</form>
+
+1. 기본적으로 버튼태그의 타입은 submit이고, 이에 버튼 클릭시 폼의 submit가 발동됨.(type='button' 주면 발동 X)
+2. form 태그 내부에 있는 input text box에서 엔터키를 누르게 되면 자동으로 Submit 됨을 이용. 대신 새로고침은 막기 위해 preventDefault처린 해줌
+   => handleKeydown함수 삭제하고 인풋과 버튼 두곳으로 인해 발생되어야할 이벤트를 form에서 submit 하나로 처리할 수 있게됨.

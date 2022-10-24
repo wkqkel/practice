@@ -26,7 +26,7 @@
 
 <main>
   <div class="todo">
-    <h1>Todo-List</h1>
+    <h1>Todo list</h1>
     <AddTodo on:add={handelAddTodo} />
     <ul>
       {#each todos as todo (todo.id)}
@@ -47,6 +47,7 @@
     height: 100%;
     width: 320px;
     padding: 20px;
-    border: 1px solid black;
   }
+
+
 </style>
