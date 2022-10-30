@@ -22,4 +22,3 @@
   <input bind:value={todoInputText} bind:this={input} placeholder="Add todo" />
   <StyledButton>Add</StyledButton>
 </form>
-

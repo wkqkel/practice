@@ -48,6 +48,4 @@
     width: 320px;
     padding: 20px;
   }
-
-
 </style>

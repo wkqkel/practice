@@ -2,7 +2,7 @@
   export let props ={};
 </script>
 
-<button {...props}><slot /></button>
+<button {...props} ><slot /></button>
 
 <style>
      button {
