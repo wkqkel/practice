@@ -1,10 +1,17 @@
 import styled from 'styled-components'
 import { colors } from '~/lib/colors'
 
-export interface Props extends React.InputHTMLAttributes<HTMLInputElement> {}
+export interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+  errorMessage?: string
+}
 
-const Input = (props: Props) => {
-  return <StyledInput {...props} />
+const Input = ({errorMessage,...rest}: Props) => {
+  return (
+    <>
+      <StyledInput {...rest} />
+      {errorMessage && <Message>{errorMessage}</Message>}
+    </>
+  )
 }
 const StyledInput = styled.input`
   height: 48px;
@@ -29,4 +36,10 @@ const StyledInput = styled.input`
   }
 `
 
+const Message = styled.div`
+  margin-top: 4px;
+  font-size: 14px;
+  color: red;
+
+`
 export default Input

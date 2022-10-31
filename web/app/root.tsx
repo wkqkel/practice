@@ -10,6 +10,7 @@ import {
 } from '@remix-run/react'
 import GlobalStyle from './Components/GlobalStyle'
 import { getMyAccount, type User } from './lib/api/auth'
+import { extractError } from './lib/api/error'
 import { setClientCookie } from './lib/client'
 
 export const meta: MetaFunction = () => ({
@@ -22,8 +23,16 @@ export const loader: LoaderFunction = async ({ request }) => {
   const cookie = request.headers.get('Cookie')
   if (!cookie) return null
   setClientCookie(cookie)
-  const me = await getMyAccount()
-  return me
+  try {
+    const me = await getMyAccount()
+    return me
+  } catch (e) {
+    const error = extractError(e)
+    if(error.name === 'UnauthorizedError'){
+      console.log(error.payload)
+    }
+    return null
+  }
 }
 
 export default function App() {
