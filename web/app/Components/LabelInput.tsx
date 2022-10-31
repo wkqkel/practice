@@ -7,21 +7,22 @@ interface Props extends InputProps {
   label: string
 }
 
-const LabelInput = ({ label, ...rest }: Props) => {
+const LabelInput = ({ label, onBlur, onFocus, ...rest }: Props) => {
   const [focused, setFocused] = useState(false)
-
-  const onFocus = () => {
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    onFocus?.(e)
     setFocused(true)
   }
 
-  const onBlur = () => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    onBlur?.(e)
     setFocused(false)
   }
 
   return (
     <Block>
       <Label focused={focused}>{label}</Label>
-      <Input onFocus={onFocus} onBlur={onBlur} {...rest} />
+      <Input onFocus={handleFocus} onBlur={handleBlur} {...rest} />
     </Block>
   )
 }
