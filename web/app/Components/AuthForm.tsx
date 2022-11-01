@@ -2,7 +2,7 @@ import { Form, useActionData } from '@remix-run/react'
 import { useMemo, useState } from 'react'
 
 import styled from 'styled-components'
-import useFormLoading from '~/hooks/useFormLoading'
+import useSubmitLoading from '~/hooks/useSubmitLoading'
 import { type AppError } from '~/lib/api/error'
 import { isValidPassword, isValidUsername } from '~/lib/regex'
 import Button from './Button'
@@ -39,7 +39,7 @@ const authDescription = {
 
 const AuthForm = ({ mode, error }: Props) => {
   const action = useActionData<ActionData | undefined>()
-  const isLoading = useFormLoading()
+  const isLoading = useSubmitLoading()
   const [isInvalidUsername, setIsInvalidUsername] = useState(false)
   const [isInvalidPassword, setIsInvalidPassword] = useState(false)
 
