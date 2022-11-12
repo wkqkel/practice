@@ -1,5 +1,4 @@
 <script>
-  import StyledButton from "../components/StyledButton.svelte";
   import { createEventDispatcher } from "svelte";
   export let todo;
 
@@ -12,8 +11,8 @@
     isEditing = !isEditing;
   };
 
-  const onClickDeleteBtn = () => {
-    dispatch("delete", todo.id);
+  const onClickDoneBtn = () => {
+    dispatch("edit", { ...todo, done: !todo.done });
   };
 
   const onClickSaveBtn = () => {
@@ -21,18 +20,22 @@
     toggleIsEditing();
   };
 
-  const onClickEditBtn = () => {
-    toggleIsEditing();
-  };
-
   const onClickCancelBtn = () => {
     inputValue = todo.title;
     toggleIsEditing();
   };
+
+  const onClickEditBtn = () => {
+    toggleIsEditing();
+  };
+
+  const onClickDeleteBtn = () => {
+    dispatch("delete", todo.id);
+  };
 </script>
 
 <li class:done={todo.done}>
-  <input type="checkbox" bind:checked={todo.done} />
+  <input type="checkbox" checked={todo.done} on:change={onClickDoneBtn} />
   {#if isEditing}
     <input bind:value={inputValue} />
     <button on:click={onClickSaveBtn}>save</button>
@@ -52,5 +55,4 @@
     opacity: 0.4;
     text-decoration: line-through black;
   }
-
 </style>

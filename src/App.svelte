@@ -1,5 +1,6 @@
 <script>
   import AddTodo from "./lib/AddTodo.svelte";
+  import Filters from "./lib/Filters.svelte";
   import TodoItem from "./lib/TodoItem.svelte";
 
   const INITIAL_TODO_LIST = [
@@ -10,17 +11,47 @@
 
   let todos = [...INITIAL_TODO_LIST];
 
+  let currentTab = "all";
+  $: filteredTodos = makeFilteredTodos(currentTab, todos);
+  $: remaining = filteredTodos.filter((todo) => todo.done).length;
+
   function handelAddTodo(e) {
     const todoInputText = e.detail;
-    todos = [...todos, { id: todos.length, title: todoInputText, done: false }];
+    const id = todos[todos.length - 1]?.id + 1 || 0;
+    todos = [...todos, { id, title: todoInputText, done: false }];
   }
+
   function handleEditTodo(e) {
     const newTodo = e.detail;
     todos = todos.map((todo) => (todo.id === newTodo.id ? newTodo : todo));
   }
+
   function handleDeleteTodo(e) {
     const id = e.detail;
     todos = todos.filter((todo) => todo.id !== id);
+  }
+
+  function handleClearCompleteTodo() {
+    todos = todos.filter((todo) => !todo.done);
+  }
+
+  function handleAllCompleteTodo() {
+    todos = todos.map((todo) => ({ ...todo, done: true }));
+  }
+
+  function handleFilterTodo(e) {
+    currentTab = e.detail;
+  }
+
+  function makeFilteredTodos(tab, todos) {
+    switch (tab) {
+      case "all":
+        return todos;
+      case "active":
+        return todos.filter((todo) => !todo.done);
+      case "completed":
+        return todos.filter((todo) => todo.done);
+    }
   }
 </script>
 
@@ -28,11 +59,17 @@
   <div class="todo">
     <h1>Todo list</h1>
     <AddTodo on:add={handelAddTodo} />
+    <Filters on:filter={handleFilterTodo} />
+    <div>
+      <span>{remaining}/{filteredTodos.length}</span>
+      <button on:click={handleAllCompleteTodo}>✓</button>
+    </div>
     <ul>
-      {#each todos as todo (todo.id)}
+      {#each filteredTodos as todo (todo.id)}
         <TodoItem {todo} on:delete={handleDeleteTodo} on:edit={handleEditTodo} />
       {/each}
     </ul>
+    <button on:click={handleClearCompleteTodo}>Clear Completed</button>
   </div>
 </main>
 
