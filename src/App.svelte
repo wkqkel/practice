@@ -35,8 +35,8 @@
     todos = todos.filter((todo) => !todo.done);
   }
 
-  function handleAllCompleteTodo() {
-    todos = todos.map((todo) => ({ ...todo, done: true }));
+  function handleAllToggleTodo(e) {
+    todos = todos.map((todo) => ({ ...todo, done: e.target.checked }));
   }
 
   function makeFilteredTodos(tab, todos) {
@@ -55,10 +55,13 @@
   <div class="todo">
     <h1>Todo list</h1>
     <AddTodo on:add={handelAddTodo} />
-    <Filters bind:currentTab={currentTab} />
+    <Filters bind:currentTab />
     <div>
       <span>{remaining}/{filteredTodos.length}</span>
-      <button on:click={handleAllCompleteTodo}>✓</button>
+      <input type="checkbox" on:click={handleAllToggleTodo} id="all" />
+      <button>
+        <label for="all">v</label>
+      </button>
     </div>
     <ul>
       {#each filteredTodos as todo (todo.id)}
@@ -80,5 +83,14 @@
     height: 100%;
     width: 320px;
     padding: 20px;
+  }
+  input[type="checkbox"] {
+    display: none;
+  }
+  button:has(label[for="all"]) {
+    padding: 0;
+  }
+  label[for="all"] {
+    padding: 5px;
   }
 </style>
