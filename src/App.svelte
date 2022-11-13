@@ -1,6 +1,7 @@
 <script>
   import AddTodo from "./lib/AddTodo.svelte";
   import Filters from "./lib/Filters.svelte";
+  import DisplayWithBtn from "./lib/DisplayWithBtn.svelte";
   import TodoItem from "./lib/TodoItem.svelte";
 
   const INITIAL_TODO_LIST = [
@@ -14,7 +15,8 @@
   let currentTab = "all";
   $: filteredTodos = makeFilteredTodos(currentTab, todos);
   $: remaining = filteredTodos.filter((todo) => todo.done).length;
-
+  $: display = `${remaining}:${filteredTodos.length}`;
+ 
   function handelAddTodo(e) {
     const todoInputText = e.detail;
     const id = todos[todos.length - 1]?.id + 1 || 0;
@@ -35,8 +37,9 @@
     todos = todos.filter((todo) => !todo.done);
   }
 
-  function handleAllToggleTodo(e) {
-    todos = todos.map((todo) => ({ ...todo, done: e.target.checked }));
+  function handleToggleAllDoneTodo(e) {
+    const done = e.detail;
+    todos = todos.map((todo) => ({ ...todo, done }));
   }
 
   function makeFilteredTodos(tab, todos) {
@@ -56,13 +59,7 @@
     <h1>Todo list</h1>
     <AddTodo on:add={handelAddTodo} />
     <Filters bind:currentTab />
-    <div>
-      <span>{remaining}/{filteredTodos.length}</span>
-      <input type="checkbox" on:click={handleAllToggleTodo} id="all" />
-      <button>
-        <label for="all">v</label>
-      </button>
-    </div>
+    <DisplayWithBtn {display} on:toggleAll={handleToggleAllDoneTodo} />
     <ul>
       {#each filteredTodos as todo (todo.id)}
         <TodoItem {todo} on:delete={handleDeleteTodo} on:edit={handleEditTodo} />
@@ -83,14 +80,5 @@
     height: 100%;
     width: 320px;
     padding: 20px;
-  }
-  input[type="checkbox"] {
-    display: none;
-  }
-  button:has(label[for="all"]) {
-    padding: 0;
-  }
-  label[for="all"] {
-    padding: 5px;
   }
 </style>
