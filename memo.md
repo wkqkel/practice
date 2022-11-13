@@ -40,10 +40,9 @@ export let todo;
 https://svelte.dev/tutorial/reactive-declarations
 https://daveceddia.com/svelte-reactive-destructuring/
 
-  export let todo;
-  $: ({ id, done, title } = todo);
-  $: inputValue = title;
-
+export let todo;
+$: ({ id, done, title } = todo);
+$: inputValue = title;
 
 근데 이렇게하니 done이 또안됨 title.done에 할당이 안돼고 done에 하기때문인듯
 
@@ -118,11 +117,13 @@ component에도 bind해줘야함
      결국 false일때 뒤에값을 반환하는 || 을 이용
 
 ## 3번째과제 : 필터링
+
 <!-- <div>
   <button on:click={onClickFilterBtn} name="all">All</button>
   <button on:click={onClickFilterBtn} name="active">Active</button>
   <button on:click={onClickFilterBtn} name="completed">Completed</button>
 </div> -->
+
 처음에 버튼으로 구현했다가 js없이 css만으로 tab전환시키려고 input radio방식으로 바꿈.
 https://velog.io/@henotony/CSS만으로-Tab전환시키는-방법
 
@@ -142,10 +143,10 @@ label, input중 뭘 onClick달아도 상관없는줄알았는데,
 label은 non-interactive-element라고 린트에러
 
 ### 문제됐던것
+
 특정탭에서 클릭했을 때 바로 사라지게
 특정탭에서 리스트 다 사라졌을때 모든리스트뜨는 현상 없애기
 이유: 아래
-
 
 <script>
   import AddTodo from "./lib/AddTodo.svelte";
@@ -234,21 +235,25 @@ label은 non-interactive-element라고 린트에러
 </style>
 
 일단 필터드했다가 되돌아가야하므로 필터드와 그냥 리스트 두개의 상태가 필요하다고 생각했음.
-간단히 이렇게 하려했는데, 이때 수정을 todos로 하는데, 
+간단히 이렇게 하려했는데, 이때 수정을 todos로 하는데,
 todos가 바뀌면서 바뀐 todos로만 필터스가 할당되면서 필터링이 사라짐.
 그래서 클릭시만이 아닌, 클릭후에도 유지가 필요하기때문에 현재 탭을 가리키는 상태가 필요함을 느낌.
 
 그리고 스벨트 $는 기본적으로 사용된 변수가 바뀔때마다 실행됨. 그래서 처음엔 todos를 함수를 만들때 todos를 안넘겨주는 방식으로 만들었다가,
 그렇게하면 인지를 못해서 파라미터로 넘겨주는 방식으로 변경. 사실 이게 좀 더 함수형에 가깝고 좋은 코드임
 
-그리고 makeFilteredTodos의 코드, 미세팁에서 본대로 객체(맵)형식으로 하려했는데, 결국 todos를 파라미터로받아야 $를 인지하는데, 
+그리고 makeFilteredTodos의 코드, 미세팁에서 본대로 객체(맵)형식으로 하려했는데, 결국 todos를 파라미터로받아야 $를 인지하는데,
 맵의 값이 함수 형태가 돼야하는데, 오히려 스위치문이 단순하다 판단하여 유지.
 
+스벨트 스럽게 변화. 기존 온클릭으로 넘겨줬는데 공식문서의 bind:group 이용 및 css 선택자 has써봄.\
+
+![](https://velog.velcdn.com/images/wkqkel/post/1aed80b0-5847-4ed8-ac9b-fe6dec765d62/image.png)
+
+
 잘했다고 생각한 것:
-1. 탭컴포넌트 내에서는 js없이 css로만 클린된 것을 구현
-2.기존 코드를 많이 안바꾸고, 필터를 구현
-아쉬운 부분: 
-1.스벨트의 key부분을 아직 이해못함. 그냥 안하면 돔 삭제 부분이 이상해서 넣어주니까 제대로 작동함. 
-스벨트 문서에서는 돔이 정확한 엘리먼트을 찾는 것을 인지하게 해준다는데, 
-아마 리액트의 키라고 생각하면 될텐데, 조금 다르게 동작하는 것 같아서 아직 잘 모르겠음.
+
+1. 탭컴포넌트 내에서는 js없이 css로만 클린된 것을 구현 => 근데 스벨트스럽게 바꾸면서 내려주게됨. 2.기존 코드를 많이 안바꾸고, 필터를 구현
+   아쉬운 부분: 1.스벨트의 key부분을 아직 이해못함. 그냥 안하면 돔 삭제 부분이 이상해서 넣어주니까 제대로 작동함.
+   스벨트 문서에서는 돔이 정확한 엘리먼트을 찾는 것을 인지하게 해준다는데,
+   아마 리액트의 키라고 생각하면 될텐데, 조금 다르게 동작하는 것 같아서 아직 잘 모르겠음.
 2. 시간 오래걸림. 처음부터 상태가 필요하단 것을 인지못함. 근데 진짜로 있어야만 할까?

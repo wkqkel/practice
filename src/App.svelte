@@ -39,10 +39,6 @@
     todos = todos.map((todo) => ({ ...todo, done: true }));
   }
 
-  function handleFilterTodo(e) {
-    currentTab = e.detail;
-  }
-
   function makeFilteredTodos(tab, todos) {
     switch (tab) {
       case "all":
@@ -59,7 +55,7 @@
   <div class="todo">
     <h1>Todo list</h1>
     <AddTodo on:add={handelAddTodo} />
-    <Filters on:filter={handleFilterTodo} />
+    <Filters bind:currentTab={currentTab} />
     <div>
       <span>{remaining}/{filteredTodos.length}</span>
       <button on:click={handleAllCompleteTodo}>✓</button>
