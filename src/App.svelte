@@ -1,7 +1,7 @@
 <script>
   import AddTodo from "./lib/AddTodo.svelte";
   import Filters from "./lib/Filters.svelte";
-  import DisplayWithBtn from "./lib/DisplayWithBtn.svelte";
+  import DisplayWithAllToggleBtn from "./lib/DisplayWithAllToggleBtn.svelte";
   import TodoItem from "./lib/TodoItem.svelte";
 
   const INITIAL_TODO_LIST = [
@@ -59,7 +59,7 @@
     <h1>Todo list</h1>
     <AddTodo on:add={handelAddTodo} />
     <Filters bind:currentTab />
-    <DisplayWithBtn {display} on:toggleAll={handleToggleAllDoneTodo} />
+    <DisplayWithAllToggleBtn {display} on:toggleAll={handleToggleAllDoneTodo} />
     <ul>
       {#each filteredTodos as todo (todo.id)}
         <TodoItem {todo} on:delete={handleDeleteTodo} on:edit={handleEditTodo} />
