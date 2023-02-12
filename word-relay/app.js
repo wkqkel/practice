@@ -1,3 +1,5 @@
+import { MESSAGES } from "./constants.js";
+
 const $ = (selector) => document.querySelector(selector);
 
 class App {
@@ -21,16 +23,16 @@ class App {
   }
 
   checkParticpantsNumber() {
-    const participantsNumber = +prompt("몇 명에서 참가하시겠습니까");
+    const participantsNumber = +prompt(MESSAGES.checkParticpantsNumber);
     if (participantsNumber) {
-      alert("쿵쿵따리 쿵쿵따~ 쿵쿵따리 쿵쿵따~");
+      alert(MESSAGES.start);
       return participantsNumber;
     }
     this.checkParticpantsNumber();
   }
 
   checkCofirmGame() {
-    if (confirm("게임을 다시 하시겠습니까")) return location.reload();
+    if (confirm(MESSAGES.checkCofirmGame)) return location.reload();
     this.checkCofirmGame();
   }
 
@@ -39,12 +41,12 @@ class App {
 
     const inputText = $("#input").value;
     if (!inputText) {
-      return alert("제시어를 입력해주세요");
+      return alert(MESSAGES.requireWord);
     }
-    alert(`${inputText} 쿵쿵따~`);
+    alert(`${inputText} ${MESSAGES.chorus}`);
 
     if (!this.validateAnswer(inputText)) {
-      alert(`${$("#order").innerText}님이 패배하였습니다`);
+      alert($("#order").innerText + MESSAGES.defeat);
       return this.checkCofirmGame();
     }
 
