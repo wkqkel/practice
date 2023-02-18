@@ -9,7 +9,7 @@ class App {
   }
 
   init() {
-    this.participantsNumber = this.checkParticpantsNumber();
+    this.participantsNumber = this.checkParticipantsNumber();
     this.emptyWord();
     this.addEventListener();
   }
@@ -22,18 +22,18 @@ class App {
     $("#submit").addEventListener("submit", (e) => this.submitAnswer(e));
   }
 
-  checkParticpantsNumber() {
-    const participantsNumber = +prompt(MESSAGES.checkParticpantsNumber);
+  checkParticipantsNumber() {
+    const participantsNumber = +prompt(MESSAGES.checkParticipantsNumber);
     if (participantsNumber) {
       alert(MESSAGES.start);
       return participantsNumber;
     }
-    this.checkParticpantsNumber();
+    this.checkParticipantsNumber();
   }
 
-  checkCofirmGame() {
-    if (confirm(MESSAGES.checkCofirmGame)) return location.reload();
-    this.checkCofirmGame();
+  checkConfirmGame() {
+    if (confirm(MESSAGES.checkConfirmGame)) return location.reload();
+    this.checkConfirmGame();
   }
 
   submitAnswer(e) {
@@ -47,7 +47,7 @@ class App {
 
     if (!this.validateAnswer(inputText)) {
       alert($("#order").innerText + MESSAGES.defeat);
-      return this.checkCofirmGame();
+      return this.checkConfirmGame();
     }
 
     this.updateOrder();
