@@ -1,0 +1,14 @@
+.balls, .bonus {
+  height: 70px;
+  display: flex;
+  gap: 10px;
+}
+
+.ball {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: black 1px solid;
+  text-align: center;
+  line-height: 30px;
+}

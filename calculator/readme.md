@@ -26,5 +26,5 @@
 한번 계산하고 다시 숫자를 누르면 어떻게 처리?
 상태 캡슐화?
 상수화 뭘 더 하면 좋을까
-파일을 더쪼개기(constant, 도메인로직인 calculator분리, dom및 event바인딩 분리, util 분리)
+파일 쪼개기(constant, 도메인로직인 calculator분리, dom 및 event 바인딩 분리, util 분리)
 도메인 로직에 대한 테스트코드 작성
