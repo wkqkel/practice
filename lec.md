@@ -325,8 +325,48 @@ nodemon ./bin/www.js
 - DOM 이란 Document Object Model
 - 일종의 인터페이스
 
-ejs에서 쿼리셀렉터 찍기전에 console.log가 실행됨
-script에 defer/async가 있는데 defer해야함.
+- html읽다가 js읽음.
+  ejs에서 쿼리셀렉터 찍기전에 console.log가 실행됨
+  script에 defer/async가 있는데 defer해야함.
 
 defer 스크립트 실행은 페이지 구성이 끝날 때까지 지연 됩니다.
 async 는 제각각 실행.
+
+```
+"use strict";
+
+const id = document.querySelector("#id");
+const password = document.querySelector("#password");
+const loginButton = document.querySelector("#login-button");
+
+let count = 0;
+
+loginButton.addEventListener("click", login);
+
+// const로 선언하면 호이스팅 문제일어남
+// Uncaught ReferenceError: Cannot access 'login' before initialization
+function login() {
+  const req = {
+    id: id.value,
+    password: password.value,
+  };
+  console.log(req);
+}
+```
+
+## 16강 fetch | 프런트에서 서버로 데이터보내기
+
+- fetch
+
+```
+  // 첫번째 인자로 어떤 경로로 주고 받을지 먼저 정의
+  // 바디에 데이터 json형태로 전달, method,
+  // 헤더에 데이터형태(Content-Type)등을 명시적으로 전달.
+  fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  });
+```
