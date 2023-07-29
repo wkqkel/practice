@@ -370,3 +370,115 @@ function login() {
     body: JSON.stringify(req),
   });
 ```
+
+## 17강 로그인 API만들기 in 서버 | 프런트의 요청데이터 파싱 | body-parser
+
+```
+// src/routes/home/home.ctrl.js
+// 분리
+"use strict";
+
+const output = {
+  home: (req, res) => {
+    res.render("home/index");
+  },
+  login: (req, res) => {
+    res.render("home/login");
+  },
+};
+
+const process = {
+  login: (req, res) => {
+    console.log(req.body);
+  },
+};
+
+module.exports = { output, process };
+```
+
+```
+// src/app.js
+"use strict";
+
+// 모듈
+const express = require("express");
+const bodyParser = require("body-parser");
+const app = express();
+
+// 라우팅
+const home = require("./src/routes/home");
+
+// 앱세팅
+app.set("views", "./src/views");
+app.set("view engine", "ejs");
+app.use(express.static(`${__dirname}/src/public`));
+
+app.use(bodyParser.json());
+// URL을 통해 전달되는 데이터에 한글, 공백 등과 같은 문자가 포함될 경우 제대로 인식되지않는 문제 해결
+app.use(bodyParser.urlencoded({ extended: true }));
+// 실행 순서 bodyParser가 먼저 와야함!
+app.use("/", home);
+
+module.exports = app;
+```
+
+## 18강 로그인 인증 기능 만들기 in 서버 | 유저 데이터 만들기
+
+```
+// home.ctrl.js
+
+const process = {
+  login: (req, res) => {
+    const { id, password } = req.body;
+
+    if (users.id.includes(id)) {
+      const idx = users.id.indexOf(id);
+      if (users.password[idx] === password) {
+        return res.json({
+          success: true,
+        });
+      }
+    }
+    return res.json({
+      success: false,
+      message: "로그인에 실패하셨습니다.",
+    });
+  },
+};
+
+```
+
+- res.json의 반환값 Promise
+  - res.json()의 반환값은 Promise다.
+  - 기본 res의 반환값은 Response 스트림인데,
+  - .json 메서드를 통해 Response(응답) 스트림을 읽을 수 있다.
+  - Response는 데이터가 모두 받아진 상태가 아니다.
+  - .json()으로 Response 스트리을 가져와 완료될때까지 읽는다.
+  - 다읽은 body의 텍스트를 Promise 형태로 반환한다
+- \*스트림(stream)이란 실제의 입력이나 출력이 표현된 데이터의 이상화된 흐름
+
+```
+// app/src/public/js/home
+
+  fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  }).then((res) => console.log(res.json()));
+
+```
+
+```
+// 그래서 then으로 한번 더 받아야함.
+  fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => console.log(res));
+```
