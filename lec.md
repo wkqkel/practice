@@ -509,3 +509,41 @@ const process = {
 - 다음시간에는 컨트롤러를 모델로 바꿔볼거.
 - 데이터를 컨트롤러가 절대 절대 절대 가지고 있으면 안되고, 모델로 분리해서 해당 데이터를 모델이 가지고 있도록 구현해줄것.
 - 로직도 컨트롤러에 있으면, 컨트롤러가 추가되면, 복잡해짐. 분리시켜줄것
+
+## 20강 mvc의 모델만들기 | oop | UserStorage 클래스
+
+- 데이터를 가지고 있는 무언가가 모델이 될 수 도 있고, 모델을 조작해서 데이터 처리해주는 애도 모델이 될 수 있음. (둘다 만들것)
+
+- UserStorage 구현
+
+```
+"use strict";
+
+class UserStorage {
+  static #users = {
+    id: ["뽀로로", "루피", "크롱"],
+    password: ["1111", "2222", "3333"],
+    name: ["박상원", "권해원", "최원영"],
+  };
+
+  static getUsers(...fields) {
+    const users = this.#users;
+    const newUsers = fields.reduce((newUsers, field) => {
+      // hasOwnProperty
+      //  객체가 특정 프로퍼티를 자기만의 직접적인 프로퍼티로서 소유하고 있는지를 판단하는데 사용
+      // 프로토타입 체인은 확인 X
+      if (users.hasOwnProperty(field)) {
+        newUsers[field] = users[field];
+      }
+
+      return newUsers;
+    }, {});
+
+    return newUsers;
+  }
+}
+
+module.exports = UserStorage;
+```
+
+- 다음시간에는 로직들을 User 모델로 분리
