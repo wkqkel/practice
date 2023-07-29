@@ -288,3 +288,7 @@ git status
 
 라이센스 추가
 insights -> license -> add
+
+## 12강 폴더구조 최적화
+app > src + nin 
+src > routes + views
