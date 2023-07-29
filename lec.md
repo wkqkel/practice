@@ -290,5 +290,20 @@ git status
 insights -> license -> add
 
 ## 12강 폴더구조 최적화
-app > src + nin 
+
+app > src + nin
 src > routes + views
+
+## 13강 프런트를 위한 js만들기 | public 폴더 연결
+
+```
+// src/js/home/login.js
+// 노드에서는 접근불가 -> 미들웨어 추가
+<script src="/js/home/login.js"></script>
+
+// 현재 디렉토리 네임을 가져와서(app.js의 위치)
+app.use(express.static(`${__dirname}/src/public`))
+
+app.use("/", home); // use ->  미들웨어를 등록해주는 메서드
+// 루트경로로 오면 home으로 이동하게 됨. 거기로 이동해서 안의 콜백함수가 실행됨
+```
