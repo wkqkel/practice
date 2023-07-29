@@ -317,3 +317,16 @@ killall -9 node
 
 nodemon ./bin/www.js
 ```
+
+## 15강 dom으로 html 객체 제어하기 | 프런트 기능 구현
+
+- 프런트에서 아이디와 비밀번호를 받고 로그인 버튼을 누르면 서버로 전달하고 서버가 로직처리.
+  -> 입력 값을 js에서 제어할 수 있어야함 그를 가능하게 해주는게 돔 객체
+- DOM 이란 Document Object Model
+- 일종의 인터페이스
+
+ejs에서 쿼리셀렉터 찍기전에 console.log가 실행됨
+script에 defer/async가 있는데 defer해야함.
+
+defer 스크립트 실행은 페이지 구성이 끝날 때까지 지연 됩니다.
+async 는 제각각 실행.
