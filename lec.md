@@ -285,3 +285,6 @@ ctrl x -> y -> enter
 // stage area에 있는 파일을 볼 수 있음.
 git status
 ```
+
+라이센스 추가
+insights -> license -> add
