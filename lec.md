@@ -307,3 +307,13 @@ app.use(express.static(`${__dirname}/src/public`))
 app.use("/", home); // use ->  미들웨어를 등록해주는 메서드
 // 루트경로로 오면 home으로 이동하게 됨. 거기로 이동해서 안의 콜백함수가 실행됨
 ```
+
+## 14강 nodemon으로 서버띄우기 | 개발 생산성 향상
+
+```
+npm i -g nodemon
+
+killall -9 node
+
+nodemon ./bin/www.js
+```

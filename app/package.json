@@ -7,7 +7,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "bin": {
-    "woorimit": "bin/www.js"
+    "woorimit": "nodemon ./bin/www.js"
   },
   "devDependencies": {},
   "scripts": {
