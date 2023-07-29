@@ -482,3 +482,30 @@ const process = {
     .then((res) => res.json())
     .then((res) => console.log(res));
 ```
+
+## 19강 서버의 응답데이터 처리 in 프런트
+
+```
+ fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(req),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.success) {
+        location.href = "/";
+      } else {
+        alert(res.message);
+      }
+    })
+    .catch((err) => {
+      console.error(new Error("로그인 중 에러 발생"));
+    });
+```
+
+- 다음시간에는 컨트롤러를 모델로 바꿔볼거.
+- 데이터를 컨트롤러가 절대 절대 절대 가지고 있으면 안되고, 모델로 분리해서 해당 데이터를 모델이 가지고 있도록 구현해줄것.
+- 로직도 컨트롤러에 있으면, 컨트롤러가 추가되면, 복잡해짐. 분리시켜줄것
