@@ -655,7 +655,7 @@ form 은 기본적으로 submit함. 페이지가 리로드됨
     });
 ```
 
-## 27강 파일 DB로 구현 | promise와 async, await로 비동기 최적화
+## 27강 파일 DB로 로그인 구현 | promise와 async, await로 비동기 최적화
 
 - const fs = require("fs").promises;
 - 하면 promise로 변환하게 됨.
@@ -689,3 +689,8 @@ console.log(UserStorage.getUserInfo(client.id));
     return res.json(response);
   },
 ```
+
+## 28강 파일db로 회원가입 구현 | promise와 async await로 비동기 최적화
+
+- 에러처리
+  - 함수에서 throw new Error하고 사용처에서 try catch로 처리
