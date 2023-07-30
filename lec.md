@@ -547,3 +547,64 @@ module.exports = UserStorage;
 ```
 
 - 다음시간에는 로직들을 User 모델로 분리
+
+## 21강 User 모델 | 객체지향 | 인스턴스화
+
+지금까지 app에 다 넣고 bin은 실행 app.js는 노드를 실행할때 필요한 셋팅들
+그리고 mvc에 맞게 구조를 잡음
+ctrl에서 로직을 분리할 것(모델을 통해서)
+
+```
+// before
+// home.ctrl.js
+ login: (req, res) => {
+    const { id, password } = req.body;
+    const users = UserStorage.getUsers("id", "password");
+
+    const response = {};
+    if (users.id.includes(id)) {
+      const idx = users.id.indexOf(id);
+      if (users.password[idx] === password) {
+        response.success = true;
+        return res.json(response);
+      }
+    }
+    response.success = false;
+    response.message = "로그인에 실패하셨습니다.";
+    return res.json(response);
+  },
+```
+
+```
+// after
+// home.ctrl.js
+login: (req, res) => {
+    const user = new User(req.body);
+    const response = user.login();
+    return res.json(response);
+  },
+
+// UserStorage
+  static getUserInfo(id) {
+    const users = this.#users;
+    const idx = users.id.indexOf(id);
+    const usersKeys = Object.keys(users);
+    const userInfo = usersKeys.reduce((newUser, info) => {
+      newUser[info] = users[info][idx];
+      return newUser;
+    }, {});
+
+    return userInfo;
+  }
+
+// User
+  login() {
+    const { id, password } = UserStorage.getUserInfo(this.body.id);
+    if (id === this.body && password === this.body.password) {
+      return { success: true };
+    }
+
+    return { success: false, message: "로그인에 실패하셨습니다." };
+  }
+
+```
