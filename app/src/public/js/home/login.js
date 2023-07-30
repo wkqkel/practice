@@ -8,7 +8,7 @@ let count = 0;
 
 loginButton.addEventListener("click", login);
 
-function login() {
+function login(e) {
   const req = {
     id: id.value,
     password: password.value,
