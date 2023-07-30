@@ -8,12 +8,19 @@ class User {
   }
 
   login() {
-    const { id, password } = UserStorage.getUserInfo(this.body.id);
-    if (id === this.body && password === this.body.password) {
+    const client = this.body;
+    const { id, password } = UserStorage.getUserInfo(client.id);
+    if (id === client.id && password === client.password) {
       return { success: true };
     }
 
     return { success: false, message: "로그인에 실패하셨습니다." };
+  }
+
+  register() {
+    const client = this.body;
+    const response = UserStorage.save(client);
+    return response;
   }
 }
 
