@@ -640,3 +640,52 @@ form 은 기본적으로 submit함. 페이지가 리로드됨
     git push origin :v0.1.0-notDB // 푸쉬한 깃 태그 삭제
     git tag -d v0.1.0-notDB // 로컬에서 태그 삭제
   ```
+
+## 26강 데이터 파일로 관리하기 | fs(파일시스템) | json
+
+- 지난 시간까지 데이터베이스 없이 함.
+- 이번엔 데이터베이스를 만들것.
+- 실제 사용하기 전에, 이번엔 파일로 데이터를 관리
+
+```
+   fs.readFile("./package.json", (err, data) => {
+      if (err) throw err;
+      console.log(data); // readFile로 보면 버퍼 데이터(16진수)로 보임(실제론 2진수이지만 보여주는 것만 16진수)
+      console.log(JSON.parse(data))
+    });
+```
+
+## 27강 파일 DB로 구현 | promise와 async, await로 비동기 최적화
+
+- const fs = require("fs").promises;
+- 하면 promise로 변환하게 됨.
+- then과 catch사용가능
+
+```
+console.log(UserStorage.getUserInfo(client.id));
+```
+
+하면 data를 반환하기전에 찍힘.
+프로미스를 반환하기 때문에 then이나 await로 기다려줄 수 있는데, 가독성 때문에 await 사용!
+
+```
+// login 실행하는데도 오래걸리니까 login 함수를 싱행하는 곳에도 await를 걸어줘야함.
+// async await는 자체적으로 promise를 반환해주도록 설정돼어있음
+// User.js
+  async login() {
+    const client = this.body;
+    const { id, password } = await UserStorage.getUserInfo(client.id);
+
+    if (id === client.id && password === client.password) {
+      return { success: true };
+    }
+
+    return { success: false, message: "로그인에 실패하셨습니다." };
+  }
+// home.ctrl.js
+ login: async (req, res) => {
+    const user = new User(req.body);
+    const response = await user.login();
+    return res.json(response);
+  },
+```

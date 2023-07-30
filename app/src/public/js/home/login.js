@@ -9,6 +9,7 @@ let count = 0;
 loginButton.addEventListener("click", login);
 
 function login(e) {
+  e.preventDefault();
   const req = {
     id: id.value,
     password: password.value,
