@@ -610,6 +610,20 @@ login: (req, res) => {
 ```
 
 ## 22강 로그인화면꾸미기 | 오픈소스 사용해보기 | 코드펜
+
 - codepen comments 스크롤 최하단 저작권 확인하고 사용, 코드 최상단에 주석으로 명시
 
 ## 23강 회원가입 화면 만들기 | 코드펜
+
+## 24강 회원가입 요청 구현 in 프론트 | fetch | ajax
+
+form 은 기본적으로 submit함. 페이지가 리로드됨
+(p태그로 바꿈 , css도 바꿔줘야 해서 별로임 + 시맨틱하지않음)
+
+다른 방법
+
+```
+<div class="form" onsubmit="return false;">
+또는
+버튼 함수에 event.preventDefault() 같은거
+```
