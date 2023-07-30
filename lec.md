@@ -631,3 +631,12 @@ form 은 기본적으로 submit함. 페이지가 리로드됨
 ## 25강 회원가입 라우팅 & 기능구현 in 서버 | 깃 버전관리 | tag
 
 파일에 저장하는거 다음 시간 구현.
+
+- 깃 태그 구현
+  ```
+    git tag v0.1.0-notDB // 깃 태그 추가
+    git tag // 리스트 확인
+    git push origin v0.1.0-notDB
+    git push origin :v0.1.0-notDB // 푸쉬한 깃 태그 삭제
+    git tag -d v0.1.0-notDB // 로컬에서 태그 삭제
+  ```
