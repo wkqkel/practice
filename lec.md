@@ -746,3 +746,56 @@ postman - myspace에 요청 등록해두고 사용.
   - 엔드포인트가 접속할 수 있는 도메인.
 
 ## 31강 aws rds 한글 설정 | 파라미터 옵션 | 클라우드 | MySql
+
+- 파라미터그룹 생성
+
+  - rds - 파라미터그룹 - 파라미터그룹 생성 클릭
+  - 파라미터그룹 패밀리 - mysql8.0
+  - 그룹식별자(영상엔 안나옴) - 기본값 DB Parameter Group 그대로 사용.
+  - 그룹이름 hangul
+  - 그룹셋팅 hangul-setting
+
+- 옵션 세팅
+
+  - 만든 파라미터 그룹 들어가면 여러가지 옵션 설정가능
+  - 한글을 되게 해줄거니, 문자관련 char 검색 후 바꿀 수 있는건 다 utf-8로 설정
+  - colla 검색 후 collation_server와 connection utf8_general_ci로 설정
+  - db인스턴스에서 수정 누르고, db파라미터 그룹 생성한 것으로 변경
+
+- 데이터베이스 접속
+
+  - 엔드포인트 복사
+  - 터미널 열고, mysql -h [생성한인스턴스엔드포인트] -u wkqkel -p 엔터
+  - -h는 호스트, -u는 유저
+  - show databases
+
+  - mysql mac 설치
+
+    - brew install mysql
+    - https://velog.io/@hevton/Mac-OS에서-mysql-설치하기-homebrew-이용
+
+    - 에러1
+
+      - 에러메시지: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock' (2)
+      - 해결방법: brew services start mysql
+      - 관련링크: https://so-es-immer.tistory.com/entry/ERROR-2002-HY000-socket-tmpmysqlsock-2-%ED%95%B4%EA%B2%B0%ED%95%98%EB%A0%A4%EA%B3%A0-brew-services-start-mysql-%ED%95%A8
+
+    - 에러2
+
+      - 에러메시지: ERROR 1045 (28000): Access denied for user 'sangwon'@'localhost' (using password: YES)
+      - 해결방법: mysql -u root -p
+      - 관련링크
+        - https://bestcoding.tistory.com/3
+        - 비밀번호: https://velog.io/@michael00987/MYSQL-%EB%B9%84%EB%B0%80%EB%B2%88%ED%98%B8-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EB%B3%80%EA%B2%BD
+
+    - 에러3
+
+      - 문제: 명령어 입력해도 아무 동작 x
+      - 해결방법: mysql -u wkqkel -p -h woorimit-lecture.c4jyeaimkcdd.ap-northeast-2.rds.amazonaws.com
+      - https://doing7.tistory.com/33
+
+  - 에러4
+
+    - ERROR 2003 (HY000): Can't connect to MySQL server on 'woorimit-lecture.c4jyeaimkcdd.ap-northeast-2.rds.amazonaws.com:3306' (60)
+    - https://haviolin21.tistory.com/m/43
+    - 인바운드 규칙 추가 후 ip4 ip6 무관 하나씩 추가
