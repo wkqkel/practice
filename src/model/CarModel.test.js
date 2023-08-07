@@ -11,14 +11,19 @@ describe("CarModel", () => {
   });
 
   test("자동차의 이름은 5자 이하만 가능하다.", () => {
-    expect(() => {
-      new CarModel("크롱크롱크롱");
-    }).toThrow(ERROR_MESSAGES.OVER_MAXIMUM_CAR_NAME_LENGTH);
+    const makeCarModel = (name) => () => new CarModel(name);
+
+    expect(makeCarModel("크롱크롱크")).not.toThrow();
+    expect(makeCarModel("크롱크롱크롱")).toThrow(
+      ERROR_MESSAGES.OVER_MAXIMUM_CAR_NAME_LENGTH
+    );
   });
 
   test("자동차의 이름은 공백을 가질 수 없다.", () => {
-    expect(() => new CarModel("")).toThrow(ERROR_MESSAGES.WHITE_CAR_NAME);
-    expect(() => new CarModel("   ")).toThrow(ERROR_MESSAGES.WHITE_CAR_NAME);
+    const makeCarModel = (name) => () => new CarModel(name);
+
+    expect(makeCarModel("")).toThrow(ERROR_MESSAGES.WHITE_CAR_NAME);
+    expect(makeCarModel("   ")).toThrow(ERROR_MESSAGES.WHITE_CAR_NAME);
   });
 
   test("주어진 숫자가 4 이상일 경우 전진한다.", () => {
