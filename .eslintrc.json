@@ -9,6 +9,9 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "globals": {
+    "cy": true
+  },
   "extends": ["airbnb-base", "plugin:prettier/recommended", "prettier"],
   "rules": {
     "max-lines-per-function": ["error", 16],
@@ -23,6 +26,7 @@
         "js": "always" // 'js' 확장자 항상 허용
       }
     ],
+    "import/prefer-default-export": "off",
     "quotes": "off",
     // Prettier의 코드 포맷팅 규칙 적용
     "prettier/prettier": "error"
