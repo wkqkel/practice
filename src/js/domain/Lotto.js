@@ -1,4 +1,4 @@
-import { RULES } from './constants.js';
+import { RULES } from '../constants/constants.js';
 
 function generateLottoNumbers() {
   const lottoNumbers = [];

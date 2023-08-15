@@ -6,4 +6,4 @@ export function getIntersection(a, b) {
   return b.filter(includesInA);
 }
 
-export const test = 1;
+export const $ = element => document.querySelector(element);

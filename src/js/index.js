@@ -1,17 +1,9 @@
-const $showResultButton = document.querySelector('.open-result-modal-button');
-const $modalClose = document.querySelector('.modal-close');
-const $modal = document.querySelector('.modal');
-// const $lottoNumbersToggleButton = document.querySelector(
-//   '.lotto-numbers-toggle-button',
-// );
+import SELECTORS from './constants/selector.js';
+import { onClickPriceButton } from './handlers/handlers.js';
+import { $ } from './utils/utils.js';
 
-const onModalShow = () => {
-  $modal.classList.add('open');
-};
+function bindEventListener() {
+  $(SELECTORS.PRICE_INPUT_BUTTON).addEventListener('click', onClickPriceButton);
+}
 
-const onModalClose = () => {
-  $modal.classList.remove('open');
-};
-
-$showResultButton.addEventListener('click', onModalShow);
-$modalClose.addEventListener('click', onModalClose);
+bindEventListener();

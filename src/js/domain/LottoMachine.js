@@ -1,5 +1,9 @@
 import Lotto from './Lotto.js';
-import { ERROR_MESSAGES, LOTTO_WINNING_MAP, RULES } from './constants.js';
+import {
+  ERROR_MESSAGES,
+  LOTTO_WINNING_MAP,
+  RULES,
+} from '../constants/constants.js';
 import { getIntersection } from '../utils/utils.js';
 
 export function validatePurchaseMoney(money) {
@@ -43,7 +47,7 @@ class LottoMachine {
   bonusNumber;
 
   purchaseLottos(money) {
-    validatePurchaseMoney(money);
+    validatePurchaseMoney(+money);
 
     this.lottos = Array(money / RULES.LOTTO_PRICE).fill(new Lotto());
   }
@@ -80,4 +84,6 @@ class LottoMachine {
   }
 }
 
-export default LottoMachine;
+const lottoMachine = new LottoMachine();
+
+export default lottoMachine;

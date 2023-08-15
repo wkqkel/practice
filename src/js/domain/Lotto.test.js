@@ -1,5 +1,5 @@
 import Lotto from './Lotto.js';
-import { RULES } from './constants.js';
+import { RULES } from '../constants/constants.js';
 
 describe('Lotto', () => {
   describe('로또 번호 생성', () => {
