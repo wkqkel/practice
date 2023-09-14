@@ -1,6 +1,5 @@
 # Todo List (Svelte)
-<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/> 
-<img src="https://img.shields.io/badge/Svelte-3178C6?style=flat-square&logo=Typescript&logoColor=white"/> 
+<img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/> <img src="https://img.shields.io/badge/Svelte-FF3E00?style=flat-square&logo=Svelte&logoColor=white"/>
 
 ## ➡️ 개별 레파지토리
 - [소윤's 레포지토리 바로가기](https://github.com/soyoonJ/svelte-study)
