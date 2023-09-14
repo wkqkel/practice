@@ -1,5 +1,6 @@
 # Todo List (Svelte)
 <img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white"/> 
+<img src="https://img.shields.io/badge/Svelte-3178C6?style=flat-square&logo=Typescript&logoColor=white"/> 
 
 ## ➡️ 개별 레파지토리
 - [소윤's 레포지토리 바로가기](https://github.com/soyoonJ/svelte-study)
@@ -22,10 +23,18 @@ npm install
 npm run start
 ```
 
-## 📝 사용한 기술 스택
+## 📝 주요기능
 
-- Svelte
-- Vite (?)
+1. 전체선택
+2. 할 일 입력
+3. 체크박스
+4. 할 일 삭제
+5. 완료 갯수 / 미완료 갯수
+6. All (전체 목록)
+7. Active (미완료 목록)
+8. Completed (완료 목록)
+9. Clear Completed (완료 목록 삭제)
+
 
 
 ## 💡 회고
