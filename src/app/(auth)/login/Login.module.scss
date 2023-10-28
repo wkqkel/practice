@@ -18,7 +18,8 @@
     color: white;
   }
 
-  button:nth-of-type(2) {
+  button:nth-of-type(2),
+  button:nth-of-type(3) {
     height: 40px;
     border: 1px solid rgba(0, 0, 0, 0.4);
   }

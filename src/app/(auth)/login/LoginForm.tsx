@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  GithubAuthProvider,
 } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -37,14 +38,24 @@ const LoginForm = () => {
         redirectChatPage();
       })
       .catch((error) => {
-        const errorMessage = error.message;
-
-        toast.error(errorMessage);
+        toast.error(error.message);
       });
   };
 
   const onClickGoogleLogin = () => {
     const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        toast.success("로그인에 성공했습니다.");
+        redirectChatPage();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
+  const onClickGithubLogin = () => {
+    const provider = new GithubAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
         toast.success("로그인에 성공했습니다.");
@@ -87,6 +98,9 @@ const LoginForm = () => {
         <button type="submit">로그인</button>
         <button type="button" onClick={onClickGoogleLogin}>
           Google 계정으로 로그인
+        </button>
+        <button type="button" onClick={onClickGithubLogin}>
+          Github 계정으로 로그인
         </button>
       </form>
     </div>
