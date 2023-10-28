@@ -1,20 +1,23 @@
 import { useState } from "react";
-import styles from "./Login.module.scss";
+import styles from "./register.module.scss";
 
 import { auth } from "@/firebase/firebase";
-import {
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const LoginForm = () => {
+const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+function isValidEmail(email: string): boolean {
+  return emailRegex.test(email);
+}
+
+const RegisterForm = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const redirectChatPage = () => {
     router.push("/chat");
@@ -28,12 +31,24 @@ const LoginForm = () => {
     setEmail(e.target.value);
   };
 
+  const onChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+  };
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    signInWithEmailAndPassword(auth, email, password)
+    if (!isValidEmail(email)) {
+      return toast.error("이메일 형식이 올바르지않습니다.");
+    }
+
+    if (password !== confirmPassword) {
+      return toast.error("비밀번호가 일치하지않습니다.");
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        toast.success("로그인에 성공했습니다.");
+        toast.success("회원가입에 성공했습니다.");
         redirectChatPage();
       })
       .catch((error) => {
@@ -43,22 +58,9 @@ const LoginForm = () => {
       });
   };
 
-  const onClickGoogleLogin = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        toast.success("로그인에 성공했습니다.");
-        redirectChatPage();
-      })
-      .catch((error) => {
-        toast.error(error.message);
-        console.log(error);
-      });
-  };
-
   return (
     <div>
-      <h2>로그인</h2>
+      <h2>회원가입</h2>
       <form onSubmit={onSubmit} className={styles.form}>
         <div className={styles.inputWrapper}>
           <label htmlFor="email">이메일</label>
@@ -82,16 +84,25 @@ const LoginForm = () => {
             autoComplete="off"
           />
         </div>
-        <Link href="/register" className={styles.link}>
-          회원가입 페이지로 가기
+
+        <div className={styles.inputWrapper}>
+          <label htmlFor="confirmPassword">비밀번호 확인</label>
+          <input
+            id="confirmPassword"
+            placeholder="비밀번호를 입력하세요"
+            type="password"
+            value={confirmPassword}
+            onChange={onChangeConfirmPassword}
+            autoComplete="off"
+          />
+        </div>
+        <Link href="/login" className={styles.link}>
+          로그인 페이지로 가기
         </Link>
-        <button type="submit">로그인</button>
-        <button type="button" onClick={onClickGoogleLogin}>
-          Google 계정으로 로그인
-        </button>
+        <button type="submit">회원가입</button>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
