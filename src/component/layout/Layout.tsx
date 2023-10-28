@@ -1,4 +1,4 @@
-import styles from "./Layout.module.scss";
+import Header from "./header/Header";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -7,10 +7,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <header className={styles.header}>
-        <span>Logo</span>
-        <button>Logout</button>
-      </header>
+      <Header />
       <main>{children}</main>
     </>
   );

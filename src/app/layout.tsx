@@ -5,6 +5,8 @@ import "../styles/globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/component/layout/Layout";
+import Auth from "@/component/auth/Auth";
+import RecoilRootProvider from "@/provider/RecoilRootProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,10 +23,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Layout>
-          {children}
-          <ToastContainer />
-        </Layout>
+        <RecoilRootProvider>
+          <Auth>
+            <Layout>
+              {children}
+              <ToastContainer />
+            </Layout>
+          </Auth>
+        </RecoilRootProvider>
       </body>
     </html>
   );

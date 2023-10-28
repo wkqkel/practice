@@ -76,7 +76,6 @@ const LoginForm = () => {
           <input
             id="password"
             placeholder="비밀번호를 입력하세요"
-            type="password"
             value={password}
             onChange={onChangePassword}
             autoComplete="off"
