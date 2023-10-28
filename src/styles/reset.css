@@ -1,0 +1,171 @@
+/* 기본 설정값 */
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+table,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+textarea,
+a,
+button,
+select {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+input,
+textarea,
+select,
+button,
+table {
+  /* font-family: 🌈;
+    font-size: 🌈;
+    line-height: 🌈; */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  /* background-color: 🌈;
+    color: 🌈; */
+  -webkit-text-size-adjust: none; /* 텍스트 크기 자동 조절 기능 : none */
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+img,
+fieldset,
+iframe {
+  border: 0;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+em,
+address {
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+a:focus,
+input:focus,
+button:focus,
+textarea:focus {
+  outline: none;
+}
+
+input {
+  border: 0;
+  -webkit-appearance: none; /* input 기본 외형 삭제 */
+
+  &[type="file"],
+  &[type="checkbox"] {
+    display: none;
+  }
+
+  &::placeholder {
+    /* color: 🌈; */
+  }
+}
+
+i,
+em {
+  font-style: normal;
+}
+
+button {
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.hide {
+  display: none !important;
+}
+
+.blind {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.block-scroll {
+  overflow: hidden !important;
+  height: 100%;
+  min-height: 100%;
+  touch-action: none;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.u_skip {
+  position: relative;
+  z-index: 2147483647;
+
+  /* > a {
+		🌈
+	} */
+}

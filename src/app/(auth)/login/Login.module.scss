@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 400px;
+
+  button:nth-of-type(1) {
+    height: 40px;
+    background-color: #6a24fe;
+    color: white;
+  }
+
+  button:nth-of-type(2) {
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+  }
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  input {
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 0 4px;
+  }
+}
