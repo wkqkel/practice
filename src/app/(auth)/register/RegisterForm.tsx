@@ -20,6 +20,8 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSecretPassword, setIsSecretPassword] = useState(true);
+  const isNotSameConfirmPassword =
+    !!password && !!confirmPassword && password !== confirmPassword;
 
   const redirectChatPage = () => {
     router.push("/chat");
@@ -48,7 +50,7 @@ const RegisterForm = () => {
       return toast.error("이메일 형식이 올바르지않습니다.");
     }
 
-    if (password !== confirmPassword) {
+    if (isNotSameConfirmPassword) {
       return toast.error("비밀번호가 일치하지않습니다.");
     }
 
@@ -78,6 +80,11 @@ const RegisterForm = () => {
             onChange={onChangeEmail}
             autoComplete="off"
           />
+          {!isValidEmail && (
+            <span className={styles.errorMessage}>
+              이메일 형식이 올바르지않습니다.
+            </span>
+          )}
         </div>
         <div className={styles.inputWrapper}>
           <label htmlFor="password">비밀번호</label>
@@ -114,6 +121,11 @@ const RegisterForm = () => {
                 aria-label="close-password"
                 onClick={toggleIsSecretPassword}
               />
+            )}
+            {isNotSameConfirmPassword && (
+              <span className={styles.errorMessage}>
+                비밀번호가 일치하지않습니다.
+              </span>
             )}
           </div>
         </div>

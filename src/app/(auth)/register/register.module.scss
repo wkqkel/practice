@@ -57,3 +57,11 @@
     cursor: pointer;
   }
 }
+
+.errorMessage {
+  font-size: 1.2rem;
+  color: red;
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+}
