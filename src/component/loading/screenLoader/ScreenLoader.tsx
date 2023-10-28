@@ -3,8 +3,8 @@ import styles from "./ScreenLoader.module.scss";
 
 const ScreenLoader = () => {
   return (
-    <div className={styles.screenLoader}>
-      <PacmanLoader color="rgba(54, 215, 183, 1)" />
+    <div className={styles.screen}>
+      <PacmanLoader color="#eabe10" className={styles.loader} />
     </div>
   );
 };
