@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
@@ -18,6 +19,7 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isSecretPassword, setIsSecretPassword] = useState(true);
 
   const redirectChatPage = () => {
     router.push("/chat");
@@ -33,6 +35,10 @@ const RegisterForm = () => {
 
   const onChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(e.target.value);
+  };
+
+  const toggleIsSecretPassword = () => {
+    setIsSecretPassword((prev) => !prev);
   };
 
   const onSubmit = (e: React.FormEvent) => {
@@ -87,14 +93,29 @@ const RegisterForm = () => {
 
         <div className={styles.inputWrapper}>
           <label htmlFor="confirmPassword">비밀번호 확인</label>
-          <input
-            id="confirmPassword"
-            placeholder="비밀번호를 입력하세요"
-            type="password"
-            value={confirmPassword}
-            onChange={onChangeConfirmPassword}
-            autoComplete="off"
-          />
+          <div className={styles.passwordInput}>
+            <input
+              id="confirmPassword"
+              placeholder="비밀번호를 입력하세요"
+              type={isSecretPassword ? "password" : "text"}
+              value={confirmPassword}
+              onChange={onChangeConfirmPassword}
+              autoComplete="off"
+            />
+            {isSecretPassword ? (
+              <FaEyeSlash
+                className={styles.passwordIcon}
+                aria-label="open-password"
+                onClick={toggleIsSecretPassword}
+              />
+            ) : (
+              <FaEye
+                className={styles.passwordIcon}
+                aria-label="close-password"
+                onClick={toggleIsSecretPassword}
+              />
+            )}
+          </div>
         </div>
         <Link href="/login" className={styles.link}>
           로그인 페이지로 가기
