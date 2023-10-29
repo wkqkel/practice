@@ -20,6 +20,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSecretPassword, setIsSecretPassword] = useState(true);
+
   const isNotSameConfirmPassword =
     !!password && !!confirmPassword && password !== confirmPassword;
 
